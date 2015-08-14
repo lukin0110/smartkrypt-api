@@ -1,0 +1,165 @@
+FORMAT: 1A
+HOST: http://smartkrypt.thanksys.com/
+
+# smartkrypt
+
+Smartkrypt API
+
+# Group General
+
+## Index [/]
+### Do request [GET]
+
++ Response 200 (application/json)
+
+        {
+            "msg": "Hello World"
+        }
+
+## Updates [/updates/?cipher_text={?cipher_text}&public_key={?public_key}&nonce={?nonce}]
+### Do request [GET]
+
++ Parameters
+    + cipher_text (required, string, `foo`) 
+    + public_key (required, string, `foo`) 
+    + nonce (required, string, `foo`) 
+
++ Response 200 (application/json)
+
+        {
+            "updates": [
+                {
+                    "cipher_text": "sdfsdfsdf",
+                    "nonce": "sdfsdfsdf"
+                },
+                {
+                    "cipher_text": "sdfsdfsdf",
+                    "nonce": "sdfsdfsdf"
+                } 
+            ]
+        }
+
+## Change email [/email/?cipher_text={?cipher_text}&public_key={?public_key}&nonce={?nonce}]
+### Do request [PUT]
+
++ Parameters
+    + cipher_text (required, string, `foo`) 
+    + public_key (required, string, `foo`) 
+    + nonce (required, string, `foo`) 
+    
++ Response 200 (application/json)
+
+    + Headers
+        
+            X-Smartkrypt-Updates: false
+
+    + Body 
+    
+            {
+            }
+
+# Group Devices
+
+## Initialization [/devices/]
+### Do request [POST]
+
++ Request (application/json)
+
+        {
+            "nonce": "sdflkjsdfsdfsdafasdfsdaf",
+            "publick_key": "ewrijsdlkfjsdlkfjasdsfsdfsdf",
+            "cipher_text": "sdfsdfsdfsdfsdfsdfdsfdsfsdfdsf"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "cipher_text": "asdasdsadasdsadsadsadasd",
+            "masked_none": "wqeqweqweiouqweoiuoiuoiuoiuoiu",
+        }
+
+
+## Verification [/devices/verification/]
+### Do request [POST]
+
++ Request (application/json)
+
+        {
+            "mac": "dsfsdfkhsdkfajhsdfasdfadsf"
+        }
+
++ Response 201 (application/json)
+
+        {
+        }
+
+
+# Group Credentials
+
+## Credentials [/credentials/?cipher_text={?cipher_text}&public_key={?public_key}&nonce={?nonce}]
+### Storage [POST]
+
++ Request (application/json)
+
+        {
+            "nonce": "sdflkjsdfsdfsdafasdfsdaf",
+            "publick_key": "ewrijsdlkfjsdlkfjasdsfsdfsdf",
+            "cipher_text": "sdfsdfsdfsdfsdfsdfdsfdsfsdfdsf"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+        
+            X-Smartkrypt-Updates: false
+
+    + Body 
+    
+            {
+                "cipher_text": "asdasdsadasdsadsadsadasd",
+                "none": "wqeqweqweiouqweoiuoiuoiuoiuoiu",
+                "mail": "credential triplet"
+            }
+        
+### Query [GET]
+
++ Parameters
+    + cipher_text (required, string, `foo`) 
+    + public_key (required, string, `foo`) 
+    + nonce (required, string, `foo`) 
+
++ Response 201 (application/json)
+    
+    + Headers
+        
+            X-Smartkrypt-Updates: true
+    
+    + Body
+
+            {
+                "cipher_text": "asdasdsadasdsadsadsadasd",
+                "none": "wqeqweqweiouqweoiuoiuoiuoiuoiu",
+                "mail": "credential triplet"
+            }
+
+### Deletion [DELETE]
+
++ Parameters
+    + cipher_text (required, string, `foo`) 
+    + public_key (required, string, `foo`) 
+    + nonce (required, string, `foo`) 
+
++ Response 200 (application/json)
+
+    + Headers
+        
+            X-Smartkrypt-Updates: true
+    
+    + Body
+
+            {
+            }
+
+
+
+
